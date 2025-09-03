@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Quiz • Nabha Digital Shiksha</title>
+
+  <!-- reuse global styles + PWA meta -->
+  <link rel="stylesheet" href="style-new.css"/>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#3b82f6">
+
+  <style>
+    .wrap{max-width:800px;margin:2rem auto;padding:0 1rem}
+    .card{background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(59,130,246,.12);padding:1rem;margin-bottom:1rem}
+    body.dark .card{background:#1e293b}
+    .q{margin:.6rem 0}
+    .option{display:block;margin:.3rem 0}
+  </style>
+</head>
+<body>
+  <div id="progress-bar"></div>
+
+  <main class="wrap">
+    <h1 id="quiz-title">Quiz</h1>
+
+    <div class="card">
+      <label>Student:
+        <select id="student-select"></select>
+      </label>
+    </div>
+
+    <form id="quiz-form"></form>
+
+    <div class="card">
+      <button class="btn" id="submit-quiz">Submit</button>
+      <a class="btn secondary" href="teacher-new.html" style="margin-left:.5rem">Back to Teacher</a>
+      <p id="score-msg" class="muted" style="margin-top:.6rem"></p>
+    </div>
+  </main>
+
+  <script>
+    /* ====== LocalStorage Keys ====== */
+    const K = {
+      students: 'nds_students',
+      progress: 'nds_progress',
+      quizzes:  'nds_quizzes',
+      results:  'nds_results',
+      points:   'nds_points'   // ✅ NEW for gamification
+    };
+    const get = (k, f) => { try{return JSON.parse(localStorage.getItem(k)) ?? f;}catch{return f;} };
+    const set = (k, v) => localStorage.setItem(k, JSON.stringify(v));
+    const $ = (s, r=document)=>r.querySelector(s);
+
+    // read ?quiz=<id> from URL
+    const params = new URLSearchParams(location.search);
+    const quizId = params.get('quiz');
+
+    // fetch quiz + students
+    const quizzes = get(K.quizzes, []);
+    const quiz = quizzes.find(q=>q.id===quizId);
+
+    if (!quiz) {
+      document.body.innerHTML = '<main class="wrap"><h1>Quiz not found</h1><a class="btn" href="teacher-new.html">Back</a></main>';
+    } else {
+      // Title
+      $('#quiz-title').textContent = `${quiz.title} — ${quiz.course}`;
+
+      // Student dropdown
+      const students = get(K.students, []);
+      const sel = $('#student-select');
+      students.forEach(s=>{
+        const opt = document.createElement('option');
+        opt.value = s.id; opt.textContent = `${s.name} (${s.class})`;
+        sel.appendChild(opt);
+      });
+
+      // Render questions
+      const form = $('#quiz-form');
+      quiz.questions.forEach((q,i)=>{
+        const card = document.createElement('div');
+        card.className='card';
+        card.innerHTML = `<div class="q"><strong>Q${i+1}.</strong> ${q.q}</div>`;
+        q.options.forEach((opt,oi)=>{
+          const label = document.createElement('label');
+          label.className='option';
+          label.innerHTML = `<input type="radio" name="q${i}" value="${oi}"> ${String.fromCharCode(65+oi)}. ${opt}`;
+          card.appendChild(label);
+        });
+        form.appendChild(card);
+      });
+
+      // ✅ Submit handler with POINTS
+      $('#submit-quiz').addEventListener('click', (e)=>{
+        e.preventDefault();
+        let correct=0;
+        quiz.questions.forEach((q,i)=>{
+          const chosen = form.querySelector(`input[name="q${i}"]:checked`);
+          if (chosen && Number(chosen.value)===Number(q.answerIndex)) correct++;
+        });
+        const percent = Math.round((correct/quiz.questions.length)*100);
+        const studentId = sel.value;
+
+        // Save result
+        const results = get(K.results, []);
+        results.push({quizId: quiz.id, studentId, scorePercent: percent, ts: Date.now()});
+        set(K.results, results);
+
+        // ✅ Award points if ≥70%
+        const points = get(K.points, {});
+        if (percent >= 70) {
+          points[studentId] = (points[studentId] || 0) + 20;
+        }
+        set(K.points, points);
+
+        // Message
+        $('#score-msg').textContent = 
+          `Submitted! Score: ${percent}% (${correct}/${quiz.questions.length}) — Saved offline.`
+          + (percent >= 70 ? " 🎉 +20 points awarded!" : " (No points this time)");
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+  </script>
+
+  <!-- register SW for offline -->
+  <script>
+    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js').catch(console.error); }
+  </script>
+</body>
+</html>

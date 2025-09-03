@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Courses • Nabha Digital Shiksha (New)</title>
+  <link rel="stylesheet" href="style-new.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#3b82f6">
+</head>
+<body>
+  <!-- Scroll Progress Bar -->
+  <div id="progress-bar"></div>
+  <header>
+    <nav>
+      <a class="logo" href="index-new.html">Nabha Digital Shiksha 📚</a>
+      <ul class="nav-links">
+        <li><a href="index-new.html#hero">Home</a></li>
+        <li><a href="index-new.html#features">Features</a></li>
+        <li><a class="active" href="courses-new.html">Courses</a></li>
+        <li><a href="about-new.html">About</a></li>
+        <li><a href="teacher-new.html">Teacher</a></li>
+        <li><a href="index-new.html#contact">Contact</a></li>
+      </ul>
+      <button id="dark-toggle" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+      </button>
+      <div class="burger" aria-label="Toggle Menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb reveal">
+      <a href="index-new.html">Home</a> &gt; 
+      <span>Courses</span>
+    </nav>
+
+    <section id="courses" class="reveal">
+      <h2>All Courses</h2>
+      <!-- Filter Bar -->
+      <div class="course-filters reveal" aria-label="Course filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="digital">Digital Literacy</button>
+        <button class="filter-btn" data-filter="languages">Languages</button>
+        <button class="filter-btn" data-filter="stem">STEM Subjects</button>
+        <button class="filter-btn" data-filter="lifeskills">Life Skills</button>
+      </div>
+
+      <!-- Digital Literacy -->
+      <div class="category-block reveal" data-category="digital">
+        <h3 class="course-category">Digital Literacy</h3>
+        <div class="courses-container">
+          <div class="course-card reveal">
+            <img src="https://images.unsplash.com/photo-1554415707-6e8cf6b9bfdf?auto=format&fit=crop&w=800&q=80" alt="Digital Literacy">
+            <h3>Basic Computer Skills</h3>
+            <p>Keyboard, mouse, typing, and simple computer operations.</p>
+          </div>
+          <div class="course-card reveal">
+            <img src="https://images.unsplash.com/photo-1526378722484-cc7d97d9d43d?auto=format&fit=crop&w=800&q=80" alt="Internet Safety">
+            <h3>Safe Internet Use</h3>
+            <p>Learn cyber safety, privacy, and responsible browsing habits.</p>
+          </div>
+          <div class="course-card reveal">
+            <img src="https://images.unsplash.com/photo-1581091012184-5c4d1a3f2d1b?auto=format&fit=crop&w=800&q=80" alt="MS Office">
+            <h3>MS Office Basics</h3>
+            <p>Introduction to Word, Excel, and PowerPoint in simple steps.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Languages -->
+      <div class="category-block reveal" data-category="languages">
+        <h3 class="course-category">Languages</h3>
+        <div class="courses-container">
+          <div class="course-card reveal">
+            <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=800&q=80" alt="Punjabi">
+            <h3>Punjabi Language</h3>
+            <p>Grammar, vocabulary, and stories in the native language.</p>
+          </div>
+          <div class="course-card reveal">
+            <img src="https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=800&q=80" alt="Hindi">
+            <h3>Hindi Language</h3>
+            <p>Engaging lessons for reading, writing, and speaking Hindi.</p>
+          </div>
+          <div class="course-card reveal">
+            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80" alt="English">
+            <h3>English Language Skills</h3>
+            <p>Learn basic grammar, conversation, and storytelling.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEM Subjects -->
+      <div class="category-block reveal" data-category="stem">
+        <h3 class="course-category">STEM Subjects</h3>
+        <div class="courses-container">
+          <div class="course-card reveal">
+            <img src="https://images.unsplash.com/photo-1509228627152-72ae9ae6848d?auto=format&fit=crop&w=800&q=80" alt="Mathematics">
+            <h3>Interactive Mathematics</h3>
+            <p>Fun problem-solving activities and quizzes for all levels.</p>
+          </div>
+          <div class="course-card reveal">
+            <img src="https://images.unsplash.com/photo-1576319155264-99536e0be1ee?auto=format&fit=crop&w=800&q=80" alt="Science">
+            <h3>Science & Technology</h3>
+            <p>Learn concepts with simple experiments and video lessons.</p>
+          </div>
+          <div class="course-card reveal">
+            <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80" alt="Environmental Studies">
+            <h3>Environmental Studies</h3>
+            <p>Understand sustainability, environment, and climate basics.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Life Skills -->
+      <div class="category-block reveal" data-category="lifeskills">
+        <h3 class="course-category">Life Skills</h3>
+        <div class="courses-container">
+          <div class="course-card reveal">
+            <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=800&q=80" alt="Teacher Support">
+            <h3>Teacher Support</h3>
+            <p>Training and resources for teachers to use our tools effectively.</p>
+          </div>
+          <div class="course-card reveal">
+            <img src="https://images.unsplash.com/photo-1542744094-24638eff58bb?auto=format&fit=crop&w=800&q=80" alt="Financial Literacy">
+            <h3>Financial Literacy</h3>
+            <p>Basics of money management, saving, and banking.</p>
+          </div>
+          <div class="course-card reveal">
+            <img src="https://images.unsplash.com/photo-1584697964190-8e8b52e4e4f2?auto=format&fit=crop&w=800&q=80" alt="Career Skills">
+            <h3>Digital Career Skills</h3>
+            <p>Using email, filling online forms, and job readiness.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Course Detail Modal -->
+    <div id="course-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2 id="modal-title">Course Title</h2>
+        <p id="modal-desc">Course description goes here...</p>
+        <ul id="modal-extra">
+          <li><strong>Duration:</strong> 4 weeks</li>
+          <li><strong>Includes:</strong> Videos, quizzes, offline PDFs</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <footer><p>&copy; 2025 Nabha Digital Shiksha. All Rights Reserved.</p></footer>
+  
+  <!-- Floating Help / WhatsApp Button -->
+  <a class="float-help" 
+     href="https://wa.me/919674320340?text=Hi%20Nabha%20Digital%20Shiksha%2C%20I%20need%20help" 
+     target="_blank" 
+     aria-label="Chat on WhatsApp" 
+     rel="noopener">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+ 
+  <script src="script-new.js"></script>
+  <!-- Register service worker for offline support -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(console.error);
+    }
+  </script>
+</body>
+</html>
+

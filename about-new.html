@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us • Nabha Digital Shiksha (New)</title>
+  <link rel="stylesheet" href="style-new.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#3b82f6">
+</head>
+<body>
+  <!-- Scroll Progress Bar -->
+  <div id="progress-bar"></div>
+  <header>
+    <nav>
+      <a class="logo" href="index-new.html">Nabha Digital Shiksha 📚</a>
+      <ul class="nav-links">
+        <li><a href="index-new.html#hero">Home</a></li>
+        <li><a href="index-new.html#features">Features</a></li>
+        <li><a href="courses-new.html">Courses</a></li>
+        <li><a class="active" href="about-new.html">About</a></li>
+        <li><a href="teacher-new.html">Teacher</a></li>
+        <li><a href="index-new.html#contact">Contact</a></li>
+      </ul>
+      <button id="dark-toggle" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+      </button>
+      <div class="burger" aria-label="Toggle Menu">
+        <div class="line1"></div><div class="line2"></div><div class="line3"></div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="about" class="reveal" style="padding-bottom:0">
+      <h2>Our Motto & Motive</h2>
+      <p>
+        <strong>Motto:</strong> <em>“Empowering Every Child, Everywhere.”</em><br><br>
+        <strong>Motive:</strong> We bridge the digital divide for rural Punjab with an offline-first, language-friendly platform that works on low-end devices.
+      </p>
+    </section>
+
+    <section id="team" class="reveal" style="background:#f1f5f9;">
+      <h2>Meet Our Team</h2>
+      <div class="features-container" style="justify-content:center;">
+        <div class="feature-card reveal">
+          <i class="fas fa-user-tie"></i>
+          <h3>Project Lead</h3>
+          <p>Coordinates vision, partnerships, and delivery.</p>
+        </div>
+        <div class="feature-card reveal">
+          <i class="fas fa-laptop-code"></i>
+          <h3>Tech & Offline</h3>
+          <p>Builds the app and ensures low-bandwidth performance.</p>
+        </div>
+        <div class="feature-card reveal">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <h3>Curriculum</h3>
+          <p>Designs interactive Punjabi/Hindi lessons with teacher guides.</p>
+        </div>
+        <div class="feature-card reveal">
+          <i class="fas fa-users"></i>
+          <h3>Community</h3>
+          <p>Works with schools, parents, and volunteers for rollout.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Nabha Digital Shiksha. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Floating Help / WhatsApp Button -->
+  <a class="float-help" 
+     href="https://wa.me/919674320340?text=Hi%20Nabha%20Digital%20Shiksha%2C%20I%20need%20help" 
+     target="_blank" 
+     aria-label="Chat on WhatsApp" 
+     rel="noopener">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script src="script-new.js"></script>
+  <!-- Register service worker for offline support -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(console.error);
+    }
+  </script>
+</body>
+</html>

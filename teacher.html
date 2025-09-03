@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Teacher Dashboard • Nabha Digital Shiksha</title>
+
+  <!-- your main styles + icons -->
+  <link rel="stylesheet" href="style-new.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+
+  <!-- PWA bits -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#3b82f6">
+
+  <!-- page-specific minimal styles -->
+  <style>
+    .wrap {max-width:1100px;margin:2rem auto;padding:0 1rem;}
+    .tabs {display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem}
+    .tabs button{border:1px solid #2563eb;background:#fff;color:#2563eb;padding:.5rem 1rem;border-radius:999px;cursor:pointer}
+    .tabs button.active{background:#2563eb;color:#fff}
+    body.dark .tabs button{background:#1e293b;color:#93c5fd;border-color:#93c5fd}
+    body.dark .tabs button.active{background:#93c5fd;color:#0f172a}
+    .card{background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(59,130,246,.12);padding:1rem;margin-bottom:1rem;transition:transform .3s ease,opacity .3s ease}
+    body.dark .card{background:#1e293b}
+    .grid{display:grid;gap:1rem}
+    .grid-2{grid-template-columns:1fr 1fr}
+    @media (max-width:900px){.grid-2{grid-template-columns:1fr}}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:.7rem;border-bottom:1px solid #e2e8f0;text-align:left}
+    body.dark th, body.dark td{border-color:#334155}
+    .controls{display:flex;gap:.5rem;flex-wrap:wrap}
+    .controls input, .controls select{padding:.6rem .8rem;border:1px solid #cbd5e1;border-radius:10px;background:#f8fafc}
+    body.dark .controls input, body.dark .controls select{background:#334155;border-color:#475569;color:#e2e8f0}
+    .btn{background:#2563eb;color:#fff;border:none;border-radius:10px;padding:.6rem 1rem;cursor:pointer}
+    .btn.secondary{background:#f1f5f9;color:#2563eb}
+    body.dark .btn.secondary{background:#334155;color:#93c5fd}
+    .muted{opacity:.8}
+    .tag{display:inline-block;background:#e0f2fe;color:#0369a1;padding:.2rem .5rem;border-radius:999px;font-size:.85rem;margin-left:.4rem}
+    body.dark .tag{background:#1e293b;color:#93c5fd;border:1px solid #475569}
+
+    /* Gamification extra */
+    #leaderboard li {
+      padding:.5rem 1rem;
+      background:#f1f5f9;
+      border-radius:10px;
+      margin-bottom:.4rem;
+    }
+    body.dark #leaderboard li {
+      background:#334155;
+    }
+  </style>
+</head>
+<body>
+  <!-- progress bar -->
+  <div id="progress-bar"></div>
+
+  <!-- NAVBAR -->
+  <header>
+    <nav>
+      <a class="logo" href="index-new.html">Nabha Digital Shiksha 📚</a>
+      <ul class="nav-links">
+        <li><a href="index-new.html#hero">Home</a></li>
+        <li><a href="index-new.html#features">Features</a></li>
+        <li><a href="courses-new.html">Courses</a></li>
+        <li><a href="about-new.html">About</a></li>
+        <li><a href="teacher-new.html" class="active">Teacher</a></li>
+        <li><a href="index-new.html#contact">Contact</a></li>
+      </ul>
+      <button id="dark-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+      <div class="burger" aria-label="Toggle Menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main class="wrap reveal">
+    <h1 class="reveal">Teacher Dashboard <span class="tag">Offline-ready</span></h1>
+    <p class="muted reveal">Manage students, build quizzes, and view reports — all saved locally (works without internet).</p>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="students">Students</button>
+      <button class="tab-btn" data-tab="quizzes">Quizzes</button>
+      <button class="tab-btn" data-tab="reports">Reports</button>
+      <button class="tab-btn" data-tab="gamification">Gamification</button>
+    </div>
+
+    <!-- STUDENTS -->
+    <section id="tab-students" class="card reveal tab-content active">
+      <h2>Students</h2>
+      <div class="grid grid-2">
+        <div class="card reveal">
+          <h3>Add Student</h3>
+          <div class="controls">
+            <input id="stu-name" type="text" placeholder="Full name"/>
+            <input id="stu-class" type="text" placeholder="Class/Grade (e.g., 6A)"/>
+            <button class="btn" id="add-student">Add</button>
+          </div>
+          <p class="muted" style="margin-top:.5rem">Tip: Use the same device to preserve offline data.</p>
+        </div>
+        <div class="card reveal">
+          <h3>Bulk Progress Update</h3>
+          <div class="controls">
+            <select id="progress-course">
+              <option value="Basic Computer Skills">Basic Computer Skills</option>
+              <option value="Interactive Mathematics">Interactive Mathematics</option>
+              <option value="Science & Technology">Science & Technology</option>
+              <option value="Punjabi Language">Punjabi Language</option>
+              <option value="Hindi Language">Hindi Language</option>
+              <option value="English Language Skills">English Language Skills</option>
+              <option value="Environmental Studies">Environmental Studies</option>
+              <option value="General Knowledge">General Knowledge</option>
+              <option value="Financial Literacy">Financial Literacy</option>
+              <option value="Digital Career Skills">Digital Career Skills</option>
+              <option value="Teacher Support">Teacher Support</option>
+            </select>
+            <input id="progress-value" type="number" min="0" max="100" placeholder="% complete"/>
+            <button class="btn" id="apply-progress">Apply to Selected</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="controls" style="justify-content:space-between">
+          <strong>Student List</strong>
+          <div>
+            <button class="btn secondary" id="load-demo">Load Demo Data</button>
+            <button class="btn secondary" id="export-students">Export CSV</button>
+            <button class="btn secondary" id="clear-students">Clear All</button>
+          </div>
+        </div>
+        <table id="students-table" style="margin-top:.6rem">
+          <thead>
+            <tr>
+              <th style="width:36px;"><input type="checkbox" id="check-all"></th>
+              <th>Name</th>
+              <th>Class</th>
+              <th>Progress (selected course)</th>
+              <th style="width:90px;">Actions</th>
+            </tr>
+          </thead>
+          <tbody><!-- filled by teacher-new.js --></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- QUIZZES -->
+    <section id="tab-quizzes" class="card reveal tab-content">
+      <h2>Quizzes</h2>
+      <div class="grid grid-2">
+        <div class="card reveal">
+          <h3>Create Quiz</h3>
+          <div class="controls">
+            <input id="quiz-title" type="text" placeholder="Quiz title (e.g., Basics of Computer)"/>
+            <select id="quiz-course">
+              <option value="Basic Computer Skills">Basic Computer Skills</option>
+              <option value="Interactive Mathematics">Interactive Mathematics</option>
+              <option value="Science & Technology">Science & Technology</option>
+              <option value="Punjabi Language">Punjabi Language</option>
+              <option value="Hindi Language">Hindi Language</option>
+              <option value="English Language Skills">English Language Skills</option>
+              <option value="Environmental Studies">Environmental Studies</option>
+              <option value="General Knowledge">General Knowledge</option>
+              <option value="Financial Literacy">Financial Literacy</option>
+              <option value="Digital Career Skills">Digital Career Skills</option>
+              <option value="Teacher Support">Teacher Support</option>
+            </select>
+          </div>
+          <div id="questions"><!-- dynamic questions will appear here --></div>
+          <div class="controls" style="margin-top:.6rem">
+            <button class="btn secondary" id="add-question">Add Question</button>
+            <button class="btn" id="save-quiz">Save Quiz</button>
+          </div>
+        </div>
+        <div class="card reveal">
+          <h3>Saved Quizzes</h3>
+          <table id="quizzes-table">
+            <thead><tr><th>Title</th><th>Course</th><th>Questions</th><th>Open</th><th>Delete</th></tr></thead>
+            <tbody><!-- filled by teacher-new.js --></tbody>
+          </table>
+          <p class="muted" style="margin-top:.5rem">“Open” launches the quiz player for students (works offline).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- REPORTS -->
+    <section id="tab-reports" class="card reveal tab-content">
+      <h2>Reports</h2>
+      <div class="controls reveal" style="margin-bottom:1rem">
+        <button class="btn secondary" id="export-reports">Export CSV</button>
+        <button class="btn" onclick="window.print()">Print</button>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card reveal">
+          <h3>Scores by Quiz</h3>
+          <table id="report-quizzes">
+            <thead><tr><th>Quiz</th><th>Attempts</th><th>Average %</th></tr></thead>
+            <tbody><!-- filled by teacher-new.js --></tbody>
+          </table>
+        </div>
+        <div class="card reveal">
+          <h3>Scores by Student</h3>
+          <table id="report-students">
+            <thead><tr><th>Name</th><th>Attempts</th><th>Average %</th></tr></thead>
+            <tbody><!-- filled by teacher-new.js --></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- GAMIFICATION -->
+    <section id="tab-gamification" class="card reveal tab-content" style="display:none">
+      <h2>Gamification</h2>
+
+      <!-- Points Table -->
+      <div class="card">
+        <h3>Student Points</h3>
+        <table id="points-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Points</th>
+              <th>Badges</th>
+            </tr>
+          </thead>
+          <tbody><!-- JS will fill this --></tbody>
+        </table>
+      </div>
+
+      <!-- Leaderboard -->
+      <div class="card">
+        <h3>Leaderboard</h3>
+        <ol id="leaderboard"><!-- JS will fill this --></ol>
+      </div>
+    </section>
+  </main>
+
+  <!-- Floating WhatsApp -->
+  <a class="float-help" href="https://wa.me/91XXXXXXXXXX?text=Teacher%20help%20needed" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- scripts -->
+  <script src="script-new.js"></script>
+  <script src="teacher-new.js"></script>
+
+  <!-- service worker -->
+  <script>
+    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js').catch(console.error); }
+  </script>
+</body>
+</html>
+
